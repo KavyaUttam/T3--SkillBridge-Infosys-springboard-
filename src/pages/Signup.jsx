@@ -69,26 +69,52 @@ export default function Signup() {
     if (!form.ngoAgree) err.ngoAgree = "You must agree to the terms";
     return err;
   }
+function handleSubmit(e) {
+  e.preventDefault();
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  if (activeTab === "volunteer") {
+    const vErr = validateVolunteer();
+    setErrors(vErr);
 
-    if (activeTab === "volunteer") {
-      const vErr = validateVolunteer();
-      setErrors(vErr);
-      if (Object.keys(vErr).length === 0) {
-        alert("Volunteer account created!");
-        navigate("/");
-      }
-    } else {
-      const nErr = validateNgo();
-      setErrors(nErr);
-      if (Object.keys(nErr).length === 0) {
-        alert("NGO account created!");
-        navigate("/");
-      }
+    if (Object.keys(vErr).length === 0) {
+
+      // ✅ ADD THIS BLOCK (Volunteer)
+      localStorage.setItem(
+        "userProfile",
+        JSON.stringify({
+          name: form.volName,
+          email: form.volEmail,
+          skill: form.volSkills,
+          location: form.volLocation,
+        })
+      );
+
+      alert("Volunteer account created!");
+      navigate("/");
+    }
+  } else {
+    const nErr = validateNgo();
+    setErrors(nErr);
+
+    if (Object.keys(nErr).length === 0) {
+
+      // ✅ ADD THIS BLOCK (NGO)
+      localStorage.setItem(
+        "userProfile",
+        JSON.stringify({
+          name: form.ngoName,
+          email: form.ngoEmail,
+          skill: form.ngoType,      // NGO type as skill
+          location: form.ngoLocation,
+        })
+      );
+
+      alert("NGO account created!");
+      navigate("/");
     }
   }
+}
+
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 h-screen">
