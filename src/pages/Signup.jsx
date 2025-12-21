@@ -77,6 +77,14 @@ export default function Signup() {
       const vErr = validateVolunteer();
       setErrors(vErr);
       if (Object.keys(vErr).length === 0) {
+        localStorage.setItem(
+          "userProfile",
+          JSON.stringify({
+           name: form.volName,
+           email: form.volEmail,
+           role: "volunteer",
+          })
+        );
         alert("Volunteer account created!");
         navigate("/");
       }
@@ -84,6 +92,14 @@ export default function Signup() {
       const nErr = validateNgo();
       setErrors(nErr);
       if (Object.keys(nErr).length === 0) {
+        localStorage.setItem(
+          "userProfile",
+         JSON.stringify({
+          name: form.ngoName,
+          email: form.ngoEmail,
+          role: "ngo",
+         })
+        );
         alert("NGO account created!");
         navigate("/");
       }

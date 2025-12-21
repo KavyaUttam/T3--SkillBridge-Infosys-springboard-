@@ -1,6 +1,6 @@
 import React from "react";
 import heroBg from "/images/hero-bg.jpg";          // Background image
-import heroFeature from "/images/hero-feature.png"; // Right-side feature image
+
 
 export default function Hero() {
   return (
@@ -48,7 +48,7 @@ export default function Hero() {
         {/* RIGHT SIDE IMAGE CARD */}
         <div className="hidden md:block">
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition">
-            <img src={heroFeature} alt="Featured" className="w-full object-cover" />
+            
           </div>
         </div>
       </div>
